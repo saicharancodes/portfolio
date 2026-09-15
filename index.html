@@ -5,6 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Sai Charan Tumpuri — Cloud DevOps Engineer</title>
+  <meta name="description"
+    content="Sai Charan Tumpuri — Cloud DevOps Engineer with 3+ years scaling GCP and AWS platforms with Kubernetes, Terraform, and CI/CD." />
+  <meta name="author" content="Sai Charan Tumpuri" />
+  <meta name="theme-color" content="#0e1b22" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sai Charan Tumpuri — Cloud DevOps Engineer" />
+  <meta property="og:description"
+    content="Cloud DevOps Engineer. GCP + AWS, Kubernetes, Terraform, CI/CD, observability." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <script>
     (function () {
       try {
@@ -37,8 +48,10 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
     }
 
     html,
@@ -257,7 +270,6 @@
       box-shadow: 0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, 0.25);
     }
 
-    /* ================= FOOTER REDESIGN ================= */
     /* ================= FOOTER REDESIGN ================= */
     .footer {
       position: relative;
@@ -751,12 +763,44 @@
     }
 
     .cert-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      text-decoration: none;
       background: rgba(20, 30, 38, .55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, .14);
       border-radius: 12px;
-      padding: 24px;
+      padding: 20px 22px;
+      color: inherit;
+      transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cert-badge {
+      width: 84px;
+      height: 84px;
+      flex: none;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+      transition: transform 0.25s ease;
+    }
+
+    .cert-card:hover .cert-badge {
+      transform: scale(1.05);
+    }
+
+    .cert-body {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .cert-card:hover {
+      background: rgba(26, 40, 52, 0.7);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36);
     }
 
     .cert-name {
@@ -1079,9 +1123,10 @@
 </head>
 
 <body>
+  <a id="top"></a>
   <div class="viewport">
     <div class="bg">
-      <video autoplay muted loop playsinline
+      <video autoplay muted loop playsinline preload="metadata"
         poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/693205bf-8048-456a-879e-4e0a1b85a098.webp"
         aria-label="Painted alpine panorama: a lone hiker with a pink backpack faces a snow-capped peak above a sea of clouds">
         <source
@@ -1100,7 +1145,8 @@
         systems on GCP and AWS —
         Kubernetes, Terraform, CI/CD, and observability at scale.</p>
       <div class="cta-group abs">
-        <a class="btn btn-primary" href="Sai_Charan_Tumpuri_Resume_01.pdf" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-primary" href="Sai_Charan_Tumpuri_Resume.docx" target="_blank" rel="noopener noreferrer"
+          download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -1124,7 +1170,7 @@
       <div class="experience-list">
         <article class="experience-card">
           <div class="experience-header">
-            <h3 class="experience-role">DevOps Engineer 2 <span class="experience-company">— Comcast (Sky)</span></h3>
+            <h3 class="experience-role">DevOps Engineer II <span class="experience-company">— Comcast (Sky)</span></h3>
           </div>
           <div class="experience-meta">
             <span class="experience-period">Mar 2024 – Present</span>
@@ -1146,7 +1192,7 @@
 
         <article class="experience-card">
           <div class="experience-header">
-            <h3 class="experience-role">DevOps Engineer 1 <span class="experience-company">— Comcast (Sky)</span></h3>
+            <h3 class="experience-role">DevOps Engineer I <span class="experience-company">— Comcast (Sky)</span></h3>
           </div>
           <div class="experience-meta">
             <span class="experience-period">Jun 2023 – Mar 2024</span>
@@ -1217,14 +1263,26 @@
     <div class="section-inner">
       <h2 class="section-heading">Certifications</h2>
       <div class="cert-grid">
-        <article class="cert-card">
-          <h3 class="cert-name">AWS Certified Solutions Architect – Associate</h3>
-          <p class="cert-date">Sep 2025</p>
-        </article>
-        <article class="cert-card">
-          <h3 class="cert-name">GCP Professional Cloud Architect</h3>
-          <p class="cert-date">Feb 2026</p>
-        </article>
+        <a class="cert-card" href="https://www.credly.com/badges/1ef62e52-3d2c-4052-9254-19ea8275f0c1/public_url"
+          target="_blank" rel="noopener noreferrer">
+          <img class="cert-badge"
+            src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+            alt="AWS Certified Solutions Architect – Associate badge" loading="lazy" />
+          <div class="cert-body">
+            <h3 class="cert-name">AWS Certified Solutions Architect – Associate</h3>
+            <p class="cert-date">Sep 2025</p>
+          </div>
+        </a>
+        <a class="cert-card" href="https://www.credly.com/badges/0da7271f-b69b-4cfb-bc1c-9978cae5820c/public_url"
+          target="_blank" rel="noopener noreferrer">
+          <img class="cert-badge"
+            src="https://images.credly.com/size/340x340/images/71c579e0-51fd-4247-b493-d2fa8167157a/image.png"
+            alt="Google Cloud Professional Cloud Architect badge" loading="lazy" />
+          <div class="cert-body">
+            <h3 class="cert-name">GCP Professional Cloud Architect</h3>
+            <p class="cert-date">Feb 2026</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -1284,14 +1342,6 @@
             <li class="skill-badge">
               <img class="skill-icon" src="https://cdn.simpleicons.org/helm" alt="Helm" loading="lazy" />
               <span>Helm</span>
-            </li>
-            <li class="skill-badge">
-              <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-              <span>K8s RBAC</span>
             </li>
           </ul>
         </div>
@@ -1377,81 +1427,6 @@
               <img class="skill-icon" src="https://cdn.simpleicons.org/opentelemetry" alt="OpenTelemetry"
                 loading="lazy" />
               <span>OpenTelemetry</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Systems & Networking -->
-        <div class="skill-group">
-          <div class="skill-group-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
-            <span>Systems &amp; Networking</span>
-          </div>
-          <ul>
-            <li class="skill-badge">
-              <img class="skill-icon" src="https://cdn.simpleicons.org/linux" alt="Linux" loading="lazy" />
-              <span>Linux (RHEL/CentOS)</span>
-            </li>
-            <li class="skill-badge">
-              <img class="skill-icon" src="https://cdn.simpleicons.org/gnubash" alt="Bash" loading="lazy" />
-              <span>Bash</span>
-            </li>
-            <li class="skill-badge">
-              <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                </path>
-              </svg>
-              <span>DNS / HTTP / TLS</span>
-            </li>
-            <li class="skill-badge">
-              <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span>IAM &amp; Least Privilege</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Reliability & Security -->
-        <div class="skill-group">
-          <div class="skill-group-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <span>Security &amp; Cost Governance</span>
-          </div>
-          <ul>
-            <li class="skill-badge">
-              <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m9 12 2 2 4-4"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-              </svg>
-              <span>Checkov (IaC Scan)</span>
-            </li>
-            <li class="skill-badge">
-              <svg class="skill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span>tfsec</span>
-            </li>
-            <li class="skill-badge">
-              <img class="skill-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/infracost.svg"
-                alt="InfraCost" loading="lazy" />
-              <span>InfraCost</span>
             </li>
           </ul>
         </div>
@@ -1640,7 +1615,7 @@
         </div>
         <p class="legal">© 2026 Sai Charan Tumpuri. Crafted for scalable, automated cloud systems.</p>
         <div class="footer-bottom-links">
-          <a href="#">Back to Top ↑</a>
+          <a href="#top">Back to Top ↑</a>
           <a href="mailto:post2saicharan@gmail.com">Hire Me</a>
         </div>
       </div>
@@ -1649,7 +1624,7 @@
 
   <script>
     (function () {
-      var startDate = new Date(2023, 0, 4);
+      var startDate = new Date(2023, 5, 1);
       var now = new Date();
       var years = now.getFullYear() - startDate.getFullYear();
       var hasHadAnniversaryThisYear =
@@ -1668,6 +1643,8 @@
 
       if (prefersReduced || !('animate' in Element.prototype)) {
         html.classList.remove('js-enter');
+        var bgVid = document.querySelector('.bg video');
+        if (bgVid) { try { bgVid.pause(); bgVid.removeAttribute('autoplay'); } catch (e) { } }
         return;
       }
 
