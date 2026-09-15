@@ -84,6 +84,44 @@ def add_bullet(text):
     run.font.size = Pt(10)
 
 
+def _add_hyperlink(paragraph, url, text):
+    part = paragraph.part
+    r_id = part.relate_to(
+        url,
+        "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+        is_external=True,
+    )
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), r_id)
+    new_run = OxmlElement("w:r")
+    rPr = OxmlElement("w:rPr")
+    color = OxmlElement("w:color")
+    color.set(qn("w:val"), "1155CC")
+    rPr.append(color)
+    u = OxmlElement("w:u")
+    u.set(qn("w:val"), "single")
+    rPr.append(u)
+    sz = OxmlElement("w:sz")
+    sz.set(qn("w:val"), "20")
+    rPr.append(sz)
+    new_run.append(rPr)
+    t = OxmlElement("w:t")
+    t.text = text
+    t.set(qn("xml:space"), "preserve")
+    new_run.append(t)
+    hyperlink.append(new_run)
+    paragraph._p.append(hyperlink)
+
+
+def add_bullet_with_link(text, url, link_text="Badge"):
+    p = doc.add_paragraph(style="List Bullet")
+    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.left_indent = Cm(0.5)
+    r = p.add_run(text + "  |  ")
+    r.font.size = Pt(10)
+    _add_hyperlink(p, url, link_text)
+
+
 def add_role_header(role, company, dates, location):
     # Role + dates row
     p = doc.add_paragraph()
@@ -171,8 +209,14 @@ for b in [
 
 # ---------- Certifications ----------
 add_section_heading("Certifications")
-add_bullet("AWS Certified Solutions Architect – Associate (Sep 2025)")
-add_bullet("Google Cloud Professional Cloud Architect (Feb 2026)")
+add_bullet_with_link(
+    "AWS Certified Solutions Architect \u2013 Associate (Sep 2025)",
+    "https://www.credly.com/badges/1ef62e52-3d2c-4052-9254-19ea8275f0c1/public_url",
+)
+add_bullet_with_link(
+    "Google Cloud Professional Cloud Architect (Feb 2026)",
+    "https://www.credly.com/badges/0da7271f-b69b-4cfb-bc1c-9978cae5820c/public_url",
+)
 
 # ---------- Education ----------
 add_section_heading("Education")
