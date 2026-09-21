@@ -1,18 +1,18 @@
-"""Generate a clean, single-page resume DOCX for Sai Charan Tumpuri."""
+"""Generate a clean, single-page DevOps/SRE-focused ATS resume DOCX for Sai Charan Tumpuri."""
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = "Sai_Charan_Tumpuri_Resume.docx"
+OUT = "Sai_Charan_Tumpuri_Resume_devops.docx"
 
 doc = Document()
 
 # Tight margins for single page
 for section in doc.sections:
-    section.top_margin = Cm(1.0)
-    section.bottom_margin = Cm(1.0)
+    section.top_margin = Cm(0.8)
+    section.bottom_margin = Cm(0.8)
     section.left_margin = Cm(1.4)
     section.right_margin = Cm(1.4)
 
@@ -52,8 +52,8 @@ def add_horizontal_line(paragraph):
 
 def add_section_heading(text):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(6)
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_before = Pt(4)
+    p.paragraph_format.space_after = Pt(1)
     run = p.add_run(text.upper())
     run.bold = True
     run.font.size = Pt(11)
@@ -153,7 +153,7 @@ nr.font.size = Pt(18)
 title = doc.add_paragraph()
 title.alignment = WD_ALIGN_PARAGRAPH.CENTER
 title.paragraph_format.space_after = Pt(0)
-tr = title.add_run("Cloud DevOps Engineer")
+tr = title.add_run("DevOps / Site Reliability Engineer")
 tr.font.size = Pt(11)
 
 contact = doc.add_paragraph()
@@ -176,42 +176,48 @@ add_section_heading("Summary")
 p = doc.add_paragraph()
 p.paragraph_format.space_after = Pt(2)
 p.add_run(
-    "Cloud DevOps engineer with 3+ years designing, automating, and scaling cloud "
-    "infrastructure on GCP and AWS for 20+ engineering teams at Sky (Comcast). Strong "
-    "hands-on experience with Kubernetes (GKE/EKS), Terraform at scale (300+ VMs), and "
-    "CI/CD across Jenkins, GitHub Actions, Cloud Build, and ArgoCD. Built \u201cskyform,\u201d "
-    "an internal IaC self-service platform that cut infra ticket resolution time by 60%. "
+    "Cloud DevOps/SRE engineer with 3+ years automating and scaling cloud "
+    "infrastructure on GCP and AWS for 20+ teams at Sky (Comcast). Hands-on with "
+    "Kubernetes (GKE/EKS), Terraform IaC at scale (300+ VMs), Linux and networking, "
+    "and CI/CD across Jenkins, GitHub Actions, Cloud Build, and ArgoCD. Handle "
+    "on-call incident response and SLO-driven observability. Built \u201cskyform,\u201d an "
+    "internal IaC self-service platform that cut infra ticket resolution time by 60%. "
     "AWS Solutions Architect \u2013 Associate and GCP Professional Cloud Architect certified."
-).font.size = Pt(10)
+).font.size = Pt(9.5)
 
 # ---------- Skills (cleaned) ----------
 add_section_heading("Technical Skills")
-add_skill_line("Cloud", "GCP, AWS, Azure")
-add_skill_line("Containers & Orchestration", "Kubernetes (GKE, EKS), Docker, Helm, Kustomize")
-add_skill_line("Infrastructure as Code", "Terraform, Ansible, Packer, Checkov/tfsec")
+add_skill_line("Cloud", "GCP, AWS")
+add_skill_line("Systems & Networking", "Linux, TCP/IP networking, DNS, load balancing, VPC")
+add_skill_line("Containers & Orchestration", "Kubernetes (GKE, EKS), Docker, Helm")
+add_skill_line("Infrastructure as Code", "Terraform, Ansible, Packer")
 add_skill_line("CI/CD & GitOps", "Jenkins, GitHub Actions, Cloud Build, ArgoCD")
-add_skill_line("Observability", "Prometheus, Grafana, Cloud Monitoring, OpenTelemetry")
+add_skill_line(
+    "Observability & Incident Response",
+    "Prometheus, Grafana, Cloud Monitoring, OpenTelemetry, distributed tracing, "
+    "logging, on-call, SLO/SLA, postmortems",
+)
 add_skill_line("Languages", "Python, Go, Bash, Groovy, SQL")
-add_skill_line("Data Platform", "BigQuery, Dataflow, Airflow/Composer")
+add_skill_line("Data Platform", "BigQuery, Dataflow(Apache Beam), Airflow/Composer")
 
 # ---------- Experience ----------
 add_section_heading("Professional Experience")
 
-add_role_header("DevOps Engineer II", "Comcast (Sky)", "Mar 2024 – Present", "Chennai, India")
+add_role_header("DevOps Engineer II", "Comcast", "Mar 2024 – Present", "Chennai, India")
 for b in [
     "Designed and operated Kubernetes-native CI/CD on GKE with ephemeral pod agents (Groovy + Python DSL) across 20+ pipelines, cutting idle compute by 30% and integrating E2E tests, artifact promotion, and vulnerability scans.",
     "Built \u201cskyform,\u201d an internal Terraform abstraction with project-isolated remote state that lets engineers self-serve GCP infra (BigQuery, GKE, Dataflow); reduced infra ticket resolution time by 60% and unblocked 20+ data pipelines.",
-    "Migrated legacy Dataflow and batch workloads to GKE using Helm and HPA, standardized chart templates, and enforced resource requests/limits — improving cluster utilization and reducing job runtime by 25%.",
+    "Migrated legacy Dataflow and batch workloads to GKE using Helm and HPA, standardized chart templates, and drove capacity planning and scalability improvements by enforcing resource requests/limits — reducing job runtime by 25%.",
     "Owned OS and security lifecycle: rebuilt GCP golden images with Packer, led migration of 300+ VMs from CentOS 7 to CentOS 9 with zero SLA breaches, and decommissioned 40+ underutilized VMs to cut cost and CVE exposure.",
 ]:
     add_bullet(b)
 
-add_role_header("DevOps Engineer I", "Comcast (Sky)", "Jun 2023 – Mar 2024", "Chennai, India")
+add_role_header("DevOps Engineer I", "Comcast", "Jun 2023 – Mar 2024", "Chennai, India")
 for b in [
-    "Provisioned secure GCP infrastructure (VMs, IAM, BigQuery, GCS, VPC) using Terraform and Ansible with zero-touch Cloud Build CI/CD, cutting deployment time by 60%.",
+    "Provisioned secure GCP infrastructure (VMs, IAM, BigQuery, GCS, VPC networking) using Terraform and Ansible with zero-touch Cloud Build CI/CD, cutting deployment time by 60%.",
     "Integrated InfraCost into GitHub PR checks for automated cost visibility on IaC changes, enabling proactive budget forecasting.",
     "Rebuilt 30+ legacy projects and decommissioned obsolete VMs; authored runbooks to support incident response and offshore knowledge transfer.",
-    "Owned end-to-end incident management for 300+ production VMs, monitoring CPU, memory, and 5xx error alerts via Google Cloud Monitoring and Grafana dashboards; triaged and resolved P1\u2013P4 incidents, driving root-cause analysis and reducing recurring alert volume.",
+    "Owned incident management for 300+ production Linux VMs on on-call rotation, monitoring CPU, memory, and 5xx alerts via Cloud Monitoring and Grafana; resolved P1\u2013P4 incidents against SLOs and authored postmortems to drive toil reduction.",
 ]:
     add_bullet(b)
 
