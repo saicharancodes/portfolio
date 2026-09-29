@@ -1,29 +1,32 @@
-BlueMatrix logo
-DevOps Engineer - EMEA/US Shift
-HyderabadEngineering / Technology /Full-time /Remote
-Responsibilities
-• Implement and maintain CI/CD pipelines using GoCD and GitLab.
-• Manage Terraform and Terragrunt modules to provision and maintain infrastructure.
-• Automate configuration management and environment setup using Ansible.
-• Administer and optimize Linux-based systems across hybrid cloud environments.
-• Support database cluster configurations (e.g., MySQL, Cassandra) and troubleshoot issues.
-• Deploy and maintain Docker and Kubernetes environments across multiple tiers.
-• Contribute to infrastructure observability using AWS CloudWatch and log pipelines.
-• Support secrets management, IAM policies, and environment-specific access control using SSM and AWS best practices.
- 
-Qualifications
-• 4+ years of DevOps experience with AWS and Linux-based systems.
-• Strong experience with CI/CD tools (GitLab, GoCD).
-• Hands-on with Terraform, Terragrunt, and Ansible.
-• Experience supporting and tuning database clusters (MySQL, Cassandra, or similar).
-• Proficient in containerization and orchestration (Docker, Kubernetes).
-• Familiar with scripting (e.g., Bash, Python).
-• Experience in regulated or high-availability environments (FinTech, healthcare, etc.) is a plus.
+BARCLAYS - DevOps Engineer
+Location: Pune
+Position Type: Full-time
 
-₹15,00,000 - ₹30,00,000 a year
-We may use artificial intelligence (AI) tools to support parts of the hiring process, such as reviewing applications, analyzing resumes, or assessing responses and identifying potential inconsistencies or verification signals in application materials based on available information. These tools assist our recruitment team but do not replace human judgment. Final hiring decisions are ultimately made by humans. If you would like more information about how your data is processed, please contact us.
-BlueMatrix Home Page
+ABOUT THE ROLE
+Join us as a DevOps Engineer at Barclays, responsible for supporting the successful delivery of Location Strategy projects to plan, budget, agreed quality and governance standards. You'll spearhead the evolution of our digital landscape, driving innovation and excellence. You will harness cutting-edge technology to revolutionize our digital offerings, ensuring unparalleled customer experiences.
 
-Jobs powered byLever logo
+KEY RESPONSIBILITIES
+- Development and delivery of high-quality software solutions by using industry aligned programming languages, frameworks, and tools. Ensuring that code is scalable, maintainable, and optimized for performance.
+- Cross-functional collaboration with product managers, designers, and other engineers to define software requirements, devise solution strategies, and ensure seamless integration and alignment with business objectives.
+- Collaboration with peers, participate in code reviews, and promote a culture of code quality and knowledge sharing.
+- Stay informed of industry technology trends and innovations and actively contribute to the organization's technology communities to foster a culture of technical excellence and growth.
+- Adherence to secure coding practices to mitigate vulnerabilities, protect sensitive data, and ensure secure software solutions.
+- Implementation of effective unit testing practices to ensure proper code design, readability, and reliability.
+- Design, develop and improve software, utilising various engineering methodologies, that provides business, platform, and technology capabilities for our customers and colleagues.
 
-go
+REQUIRED EXPERIENCE & SKILLS
+- Cloud & Infrastructure: Build and manage scalable environments
+- CI/CD & Automation: Strong pipeline and scripting expertise
+- Containers (Docker/Kubernetes): Deploy and scale modern apps
+- Familiarity with the complete software development lifecycle and agile methodologies
+- Experience with CI/CD tools like GitLab pipelines, Jenkins
+- Proven ability to redesign applications and drive simplification efforts
+- Familiarity with cloud platforms such as AWS, Azure
+- Risk and controls, change and transformation
+- Business acumen and strategic thinking
+- Digital and technology skills
+
+BARCLAYS VALUES & MINDSET
+- Respect, Integrity, Service, Excellence, Stewardship
+- Leadership: Listen and be authentic, Energise and inspire, Align across the enterprise, Develop others
+- Operating mindset: Empower, Challenge, Drive

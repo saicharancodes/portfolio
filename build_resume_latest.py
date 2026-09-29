@@ -8,6 +8,7 @@ Usage examples:
 from __future__ import annotations
 
 import argparse
+import html
 import re
 import sys
 from collections import OrderedDict
@@ -19,10 +20,16 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
+from reportlab.lib.enums import TA_CENTER  # pyright: ignore[reportMissingImports]
+from reportlab.lib.pagesizes import A4  # pyright: ignore[reportMissingImports]
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet  # pyright: ignore[reportMissingImports]
+from reportlab.lib.units import cm  # pyright: ignore[reportMissingImports]
+from reportlab.platypus import HRFlowable, Paragraph, SimpleDocTemplate  # pyright: ignore[reportMissingImports]
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_JD_FILE = SCRIPT_DIR / "jd_input.txt"
 DEFAULT_OUTPUT = SCRIPT_DIR / "Sai_Charan_Tumpuri_Resume_latest.docx"
+DEFAULT_PDF_OUTPUT = DEFAULT_OUTPUT.with_suffix(".pdf")
 
 STOPWORDS = {
     "a",
@@ -180,6 +187,7 @@ TERM_ALIASES = OrderedDict(
         ("gitlab", ["gitlab"]),
         ("gocd", ["gocd"]),
         ("ci cd", ["ci cd", "continuous integration", "continuous delivery", "continuous deployment"]),
+        ("gitlab ci cd", ["gitlab ci cd", "gitlab ci/cd"]),
         ("github actions", ["github actions"]),
         ("cloud build", ["cloud build"]),
         ("jenkins", ["jenkins"]),
@@ -192,6 +200,7 @@ TERM_ALIASES = OrderedDict(
         ("open telemetry", ["open telemetry", "opentelemetry"]),
         ("distributed tracing", ["distributed tracing", "tracing"]),
         ("logging", ["logging", "centralized logging", "log aggregation"]),
+        ("elk stack", ["elk stack", "elk", "elasticsearch", "logstash", "kibana"]),
         ("on call", ["on call", "on-call"]),
         ("slo", ["slo", "slos", "service level objective", "service level objectives"]),
         ("sla", ["sla", "slas", "service level agreement", "service level agreements"]),
@@ -216,6 +225,15 @@ TERM_ALIASES = OrderedDict(
         ("hybrid cloud environments", ["hybrid cloud environments"]),
         ("high availability", ["high availability", "ha"]),
         ("high-availability environments", ["high-availability environments", "high availability environments"]),
+        ("linux system administration", ["linux system administration", "linux administration", "system administration"]),
+        ("shell scripting", ["shell scripting", "shell script", "bash scripting"]),
+        ("containerization", ["containerization", "containerisation"]),
+        ("aws cloudformation", ["aws cloudformation", "cloudformation"]),
+        ("ansible roles", ["ansible roles"]),
+        ("ansible modules", ["ansible modules"]),
+        ("access controls", ["access controls", "access control"]),
+        ("encryption", ["encryption"]),
+        ("vulnerability management", ["vulnerability management", "vulnerability scans", "vulnerability scanning"]),
         ("regulated", ["regulated"]),
         ("fintech", ["fintech"]),
         ("bigquery", ["bigquery"]),
@@ -267,40 +285,40 @@ RESUME_TEMPLATE = {
         ],
     },
     "summary": (
-        "Cloud DevOps/SRE engineer with 3+ years automating and scaling cloud "
-        "infrastructure on GCP and AWS across Linux-based, hybrid cloud environments for "
-        "20+ teams at Sky (Comcast). Hands-on with Kubernetes (GKE/EKS), Terraform IaC at "
-        "scale (300+ VMs), configuration management, and CI/CD across Jenkins, GitHub Actions, "
-        "Cloud Build, and ArgoCD. Handle on-call incident response, SLO-driven observability, "
-        "and log pipelines. Built skyform, an internal IaC self-service platform that cut "
-        "infra ticket resolution time by 60%. AWS Solutions Architect - Associate and GCP "
-        "Professional Cloud Architect certified."
+        "Platform/DevOps engineer with 3+ years designing and automating scalable cloud "
+        "infrastructure on GCP and AWS across Linux-based, hybrid environments for 20+ teams "
+        "at Sky (Comcast). Hands-on with Linux system administration, shell scripting, Terraform "
+        "and Ansible, Kubernetes (GKE/EKS), Docker, and CI/CD across Jenkins, GitHub Actions, "
+        "Cloud Build, and ArgoCD. Own on-call incident response, monitoring, logging, and security "
+        "lifecycle tasks including access controls and vulnerability management. Built skyform, an "
+        "internal IaC self-service platform that cut infra ticket resolution time by 60%. AWS "
+        "Solutions Architect - Associate and GCP Professional Cloud Architect certified."
     ),
     "skills": [
         {
             "label": "Cloud",
             "base": "GCP, AWS",
-            "pool": ["gcp", "aws", "azure"],
+            "pool": ["gcp", "aws"],
         },
         {
             "label": "Systems & Networking",
-            "base": "Linux, Linux-based systems, TCP/IP networking, DNS, load balancing, VPC, hybrid cloud",
-            "pool": ["linux", "linux-based", "networking", "dns", "load balancing", "vpc", "hybrid cloud"],
+            "base": "Linux system administration, shell scripting, TCP/IP networking, DNS, load balancing, VPC, hybrid cloud",
+            "pool": ["linux system administration", "shell scripting", "linux", "networking", "dns", "load balancing", "vpc", "hybrid cloud"],
         },
         {
             "label": "Containers & Orchestration",
             "base": "Kubernetes (GKE, EKS), Docker, Helm",
-            "pool": ["kubernetes", "gke", "eks", "docker", "helm", "kustomize"],
+            "pool": ["kubernetes", "gke", "eks", "docker", "containerization", "helm", "kustomize"],
         },
         {
             "label": "Infrastructure as Code",
             "base": "Terraform, Ansible, Packer, configuration management, environment setup",
-            "pool": ["terraform", "ansible", "packer", "configuration management", "environment setup"],
+            "pool": ["terraform", "ansible", "ansible roles", "ansible modules", "packer", "configuration management", "environment setup", "aws cloudformation"],
         },
         {
             "label": "CI/CD & GitOps",
-            "base": "Jenkins, GitHub Actions, Cloud Build, ArgoCD",
-            "pool": ["jenkins", "github actions", "cloud build", "argocd", "ci cd"],
+            "base": "Jenkins, GitHub Actions, Cloud Build, ArgoCD, GitLab CI/CD",
+            "pool": ["jenkins", "github actions", "cloud build", "argocd", "ci cd", "gitlab ci cd"],
         },
         {
             "label": "Observability & Incident Response",
@@ -309,9 +327,11 @@ RESUME_TEMPLATE = {
                 "prometheus",
                 "grafana",
                 "cloud monitoring",
+                "cloudwatch",
                 "open telemetry",
                 "distributed tracing",
                 "logging",
+                "elk stack",
                 "log pipelines",
                 "on call",
                 "slo",
@@ -319,6 +339,7 @@ RESUME_TEMPLATE = {
                 "postmortem",
                 "incident response",
                 "observability",
+                "vulnerability management",
             ],
         },
         {
@@ -330,6 +351,11 @@ RESUME_TEMPLATE = {
             "label": "Data Platform",
             "base": "BigQuery, Dataflow (Apache Beam), Airflow/Composer",
             "pool": ["bigquery", "dataflow", "apache beam", "airflow", "composer"],
+        },
+        {
+            "label": "Security",
+            "base": "IAM, access controls, encryption, vulnerability management",
+            "pool": ["iam", "access controls", "encryption", "vulnerability management"],
         },
     ],
     "experience": [
@@ -351,7 +377,7 @@ RESUME_TEMPLATE = {
             "dates": "Jun 2023 - Mar 2024",
             "location": "Chennai, India",
             "bullets": [
-                "Provisioned secure GCP infrastructure (VMs, IAM, BigQuery, GCS, VPC networking) using Terraform and Ansible with zero-touch Cloud Build CI/CD, supporting Linux-based environment setup and cutting deployment time by 60%.",
+                "Provisioned secure GCP infrastructure (VMs, IAM, BigQuery, GCS, VPC networking) using Terraform and Ansible with zero-touch Cloud Build CI/CD, supporting Linux-based environment setup and shell-scripted automation while cutting deployment time by 60%.",
                 "Integrated InfraCost into GitHub PR checks for automated cost visibility on IaC changes, enabling proactive budget forecasting.",
                 "Rebuilt 30+ legacy projects and decommissioned obsolete VMs; authored runbooks for configuration management, environment setup, and incident response.",
                 "Owned incident management for 300+ production Linux VMs on on-call rotation, monitoring CPU, memory, and 5xx alerts via Cloud Monitoring and Grafana; resolved P1-P4 incidents against SLOs and authored postmortems to drive toil reduction.",
@@ -636,6 +662,133 @@ def build_document(profile: dict, output_path: Path) -> None:
     doc.save(output_path)
 
 
+def build_pdf_document(profile: dict, output_path: Path) -> None:
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        "ResumeTitle",
+        parent=styles["Title"],
+        fontName="Helvetica-Bold",
+        fontSize=18,
+        leading=20,
+        alignment=TA_CENTER,
+        spaceAfter=2,
+    )
+    subtitle_style = ParagraphStyle(
+        "ResumeSubtitle",
+        parent=styles["Normal"],
+        fontName="Helvetica",
+        fontSize=11,
+        leading=13,
+        alignment=TA_CENTER,
+        spaceAfter=2,
+    )
+    contact_style = ParagraphStyle(
+        "ResumeContact",
+        parent=styles["Normal"],
+        fontName="Helvetica",
+        fontSize=9,
+        leading=11,
+        alignment=TA_CENTER,
+        spaceAfter=6,
+    )
+    section_style = ParagraphStyle(
+        "SectionHeading",
+        parent=styles["Heading2"],
+        fontName="Helvetica-Bold",
+        fontSize=11,
+        leading=12,
+        textColor="#1F2A44",
+        spaceBefore=4,
+        spaceAfter=2,
+    )
+    body_style = ParagraphStyle(
+        "Body",
+        parent=styles["Normal"],
+        fontName="Helvetica",
+        fontSize=9.2,
+        leading=11,
+        spaceAfter=2,
+    )
+    role_style = ParagraphStyle(
+        "Role",
+        parent=styles["Normal"],
+        fontName="Helvetica-Bold",
+        fontSize=10,
+        leading=11,
+        spaceBefore=2,
+        spaceAfter=0,
+    )
+    location_style = ParagraphStyle(
+        "Location",
+        parent=styles["Normal"],
+        fontName="Helvetica-Oblique",
+        fontSize=8.5,
+        leading=10,
+        spaceAfter=1,
+    )
+    bullet_style = ParagraphStyle(
+        "Bullet",
+        parent=body_style,
+        leftIndent=10,
+        firstLineIndent=0,
+        bulletIndent=0,
+        spaceAfter=1,
+    )
+
+    story = [
+        Paragraph(html.escape(profile["name"]), title_style),
+        Paragraph(html.escape(profile["title"]), subtitle_style),
+    ]
+
+    contact_text = html.escape(profile["contact"]["prefix"]) + ""
+    contact_text += " | ".join(
+        f'<link href="{html.escape(url)}">{html.escape(label)}</link>'
+        for label, url in profile["contact"]["links"]
+    )
+    story.append(Paragraph(contact_text, contact_style))
+
+    def add_section(title: str) -> None:
+        story.append(Paragraph(title.upper(), section_style))
+        story.append(HRFlowable(width="100%", thickness=0.8, color="#666666", spaceBefore=0, spaceAfter=3))
+
+    def add_bullet_paragraph(text: str) -> None:
+        story.append(Paragraph(f"• {html.escape(text)}", bullet_style))
+
+    add_section("Summary")
+    story.append(Paragraph(html.escape(profile["summary"]), body_style))
+
+    add_section("Technical Skills")
+    for skill in profile["skills"]:
+        story.append(Paragraph(f"<b>{html.escape(skill['label'])}:</b> {html.escape(skill['display'])}", body_style))
+
+    add_section("Professional Experience")
+    for role in profile["experience"]:
+        story.append(Paragraph(f"{html.escape(role['role'])} - {html.escape(role['company'])}\t{html.escape(role['dates'])}", role_style))
+        story.append(Paragraph(html.escape(role["location"]), location_style))
+        for bullet in role["bullets"]:
+            add_bullet_paragraph(bullet)
+
+    add_section("Certifications")
+    for cert_text, cert_url in profile["certifications"]:
+        story.append(Paragraph(f'• {html.escape(cert_text)} | <link href="{html.escape(cert_url)}">Badge</link>', bullet_style))
+
+    add_section("Education")
+    story.append(Paragraph(f"<b>{html.escape(profile['education']['school'])}</b>", body_style))
+    story.append(Paragraph(html.escape(profile["education"]["dates"]), body_style))
+
+    doc = SimpleDocTemplate(
+        str(output_path),
+        pagesize=A4,
+        leftMargin=1.4 * cm,
+        rightMargin=1.4 * cm,
+        topMargin=0.8 * cm,
+        bottomMargin=0.8 * cm,
+        title=profile["name"],
+        author=profile["name"],
+    )
+    doc.build(story)
+
+
 def collect_resume_text(profile: dict) -> str:
     parts = [profile["name"], profile["title"], profile["summary"]]
     parts.extend(skill["display"] for skill in profile["skills"])
@@ -685,6 +838,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--jd-file", help="Path to a text file containing the job description.")
     parser.add_argument("--jd-text", help="Job description text passed directly on the command line.")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Output DOCX path.")
+    parser.add_argument("--pdf-output", default=str(DEFAULT_PDF_OUTPUT), help="Output PDF path.")
     parser.add_argument(
         "--print-missing-only",
         action="store_true",
@@ -701,9 +855,12 @@ def main() -> None:
     scores = compute_scores(tailored_profile, jd_terms)
 
     output_path = Path(args.output).expanduser().resolve()
+    pdf_output_path = Path(args.pdf_output).expanduser().resolve()
     build_document(tailored_profile, output_path)
+    build_pdf_document(tailored_profile, pdf_output_path)
 
     print(f"Saved: {output_path.name}")
+    print(f"Saved: {pdf_output_path.name}")
     print(f"Match score: {scores['match_score']:.1f}%")
     print(f"ATS heuristic score: {scores['ats_score']:.1f}%")
     print("Heuristic note: score is based on keyword overlap plus a small structural bonus.")
