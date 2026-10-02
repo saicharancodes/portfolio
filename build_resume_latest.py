@@ -742,7 +742,7 @@ def build_pdf_document(profile: dict, output_path: Path) -> None:
 
     contact_text = html.escape(profile["contact"]["prefix"]) + ""
     contact_text += " | ".join(
-        f'<link href="{html.escape(url)}">{html.escape(label)}</link>'
+        f'<font color="blue"><link href="{html.escape(url)}"><u>{html.escape(label)}</u></link></font>'
         for label, url in profile["contact"]["links"]
     )
     story.append(Paragraph(contact_text, contact_style))
@@ -770,7 +770,7 @@ def build_pdf_document(profile: dict, output_path: Path) -> None:
 
     add_section("Certifications")
     for cert_text, cert_url in profile["certifications"]:
-        story.append(Paragraph(f'• {html.escape(cert_text)} | <link href="{html.escape(cert_url)}">Badge</link>', bullet_style))
+        story.append(Paragraph(f'• {html.escape(cert_text)} | <font color="blue"><link href="{html.escape(cert_url)}"><u>Badge</u></link></font>', bullet_style))
 
     add_section("Education")
     story.append(Paragraph(f"<b>{html.escape(profile['education']['school'])}</b>", body_style))

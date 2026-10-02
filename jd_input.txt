@@ -1,0 +1,43 @@
+DevOps Engineer
+Job ID: 71297
+Category: Enterprise Technology
+Location: Chennai, India
+Work Type: Hybrid
+
+Who We Are:
+We are the Product Development (PD) Platform Operations team, the driving force behind Ford's next-generation infrastructure and software solutions. Our mission is to build scalable, highly available environments that empower our engineers to design and build the vehicles of the future. We thrive on innovation, embracing cutting-edge technologies and methodologies like Infrastructure-as-Code, Configuration-as-Code (powered by Ansible), and cloud-native development – all while using CI/CD methodologies.
+
+Why Join Us?
+Join a tight knit, rapidly growing team that values collaboration, continuous learning, and a passion for pushing technological boundaries. Be at the forefront of modernizing Ford's core PLM (product lifecycle management) processes and have a direct impact on the tools our engineers use every day. 
+
+This role is specifically within our Infrastructure, Platform, & DevOps portion of our Product Development (PD) Platform Operations team. This group maintains all aspects of our deployed Dassault Systèmes 3DEXPERIENCE (3DX) platform here within Ford Motor Company. 
+
+We are seeking a highly skilled and experienced Senior DevOps Engineer to join our team and play a critical role in the design, implementation, and maintenance of our PLM & Dassault Systèmes 3DEXPERIENCE platform infrastructure within Ford. This role requires a deep understanding of cloud technologies, infrastructure components, and automation tools, with a focus on ensuring the high availability, performance, and security of our platform. The ideal candidate will have extensive experience working with Google Cloud Platform (GCP) and possess advanced knowledge of various infrastructure components, including servers, VMs, networking, routing protocols, load balancing, and application/database servers.
+
+Key Responsibilities:
+- Infrastructure Design & Implementation: Design, build, and maintain the 3DEXPERIENCE platform infrastructure on-premise, in GCP, leveraging infrastructure-as-code (IaC) tools such as Terraform and Ansible
+- Automation: Develop and maintain automated scripts and processes for infrastructure provisioning, configuration management, and deployment using Terraform and Ansible
+- Cloud Management: Manage and monitor GCP resources, ensuring optimal performance, cost efficiency, and security. This includes managing Compute Engine, VPC, ILBs/EGLBS/UIG/MIGs, storage, CloudSQL and other GCP services
+- Application Support: Provide technical support for the 3DEXPERIENCE platform applications, including troubleshooting performance issues, resolving application errors, and collaborating with application developers. This includes deep understanding of Linux, JVM, Tomcat, Apache, and HAProxy
+- Security: Implement and maintain robust security measures to protect the 3DX platform infrastructure and applications from threats and vulnerabilities
+- Performance Optimization: Continuously monitor and optimize the performance of the 3DEXPERIENCE platform, identifying and resolving bottlenecks
+- Troubleshooting & Incident Management: Respond to and resolve infrastructure and application incidents, providing timely and effective solutions
+- Documentation: Create and maintain comprehensive documentation of infrastructure architecture, configurations, and processes
+- Collaboration: Collaborate with other engineering teams, including application developers, database administrators, and security engineers
+- Innovation: Research and evaluate new technologies and tools to improve the efficiency and scalability of the 3DX platform infrastructure
+
+Required Qualifications:
+- Preferred bachelor's degree in computer science, Engineering, or a related field
+- 5+ years of experience as a DevOps Engineer or similar role, with a strong focus on cloud infrastructure, and DevOps
+- Good proficiency in writing & managing Ansible playbooks, tasks, and roles
+- Proficient in automating provisioning, configuration management, and application deployment using Ansible
+- Experience integrating Ansible with other tools and platforms – such as Linux, Windows, and containers
+- Extensive experience with Google Cloud Platform (GCP), including Compute Engine, Cloud Storage, Cloud Networking, Cloud Load Balancing, and other relevant services
+- Proficiency in Infrastructure-as-Code (IaC) tools, specifically Terraform and Ansible
+- Solid understanding of server and virtualization technologies, including VMs, containers, and serverless computing
+- Good understanding of networking concepts, including routing, switching, firewalls, and load balancing
+- Advanced knowledge of Java Virtual Machines (JVMs), Tomcat, Apache HTTP Server, and HAProxy
+- Strong scripting skills (e.g., Bash, Python)
+- Strong understanding of security best practices and principles
+- Excellent problem-solving and troubleshooting skills
+- Excellent communication and collaboration skills
