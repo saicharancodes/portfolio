@@ -179,7 +179,7 @@ p.add_run(
     "Cloud DevOps engineer with 3+ years designing, automating, and scaling cloud "
     "infrastructure on GCP and AWS for 20+ engineering teams at Sky (Comcast). Strong "
     "hands-on experience with Kubernetes (GKE/EKS), Terraform at scale (300+ VMs), and "
-    "CI/CD across Jenkins, GitHub Actions, Cloud Build, and ArgoCD. Built \u201cskyform,\u201d "
+    "CI/CD across Jenkins, GitHub Actions, Cloud Build, and ArgoCD. Built \u201cterrakit,\u201d "
     "an internal IaC self-service platform that cut infra ticket resolution time by 60%. "
     "AWS Solutions Architect \u2013 Associate and GCP Professional Cloud Architect certified."
 ).font.size = Pt(10)
@@ -200,7 +200,7 @@ add_section_heading("Professional Experience")
 add_role_header("DevOps Engineer II", "Comcast (Sky)", "Mar 2024 – Present", "Chennai, India")
 for b in [
     "Designed and operated Kubernetes-native CI/CD on GKE with ephemeral pod agents (Groovy + Python DSL) across 20+ pipelines, cutting idle compute by 30% and integrating E2E tests, artifact promotion, and vulnerability scans.",
-    "Built \u201cskyform,\u201d an internal Terraform abstraction with project-isolated remote state that lets engineers self-serve GCP infra (BigQuery, GKE, Dataflow); reduced infra ticket resolution time by 60% and unblocked 20+ data pipelines.",
+    "Built \u201cterrakit,\u201d an internal Terraform abstraction with project-isolated remote state that lets engineers self-serve GCP infra (BigQuery, GKE, Dataflow); reduced infra ticket resolution time by 60% and unblocked 20+ data pipelines.",
     "Migrated legacy Dataflow and batch workloads to GKE using Helm and HPA, standardized chart templates, and enforced resource requests/limits — improving cluster utilization and reducing job runtime by 25%.",
     "Owned OS and security lifecycle: rebuilt GCP golden images with Packer, led migration of 300+ VMs from CentOS 7 to CentOS 9 with zero SLA breaches, and decommissioned 40+ underutilized VMs to cut cost and CVE exposure.",
 ]:
