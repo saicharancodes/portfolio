@@ -16,7 +16,7 @@ OUT = "Sai_Charan_Tumpuri_Resume.docx"
 PDF_OUT = "Sai_Charan_Tumpuri_Resume.pdf"
 
 NAME = "SAI CHARAN TUMPURI"
-TITLE = "DevOps / Site Reliability Engineer"
+TITLE = "DevOps Engineer | Site Reliability Engineer"
 CONTACT_PREFIX = "post2saicharan@gmail.com  |  +91 9390144066  |  Chennai, India  |  "
 CONTACT_LINKS = [
     ("GitHub", "https://github.com/saicharancodes"),
@@ -36,15 +36,14 @@ SUMMARY = (
 )
 
 SKILLS = [
-    ("Cloud", "GCP, AWS"),
+    ("Cloud Platforms", "Google Cloud Platform (GCP), Amazon Web Services (AWS)"),
     ("Containers & Orchestration", "Kubernetes (GKE, EKS), Docker, Helm"),
     ("Infrastructure as Code", "Terraform, Ansible, Packer"),
-    ("CI/CD & GitOps", "Jenkins, GitHub Actions, Cloud Build, ArgoCD"),
+    ("CI/CD & GitOps", "Jenkins, GitHub Actions, Cloud Build, Argo CD, GitHub Container Registry"),
     ("Observability & Monitoring", "Prometheus, Grafana, Cloud Monitoring, OpenTelemetry"),
     ("Systems & Networking", "Linux, TCP/IP, DNS, VPC, Load Balancers"),
     ("Languages", "Python, Go, Bash/Shell, Groovy, SQL"),
     ("Data Platform", "BigQuery, Dataflow (Apache Beam), Airflow/Composer"),
-    ("AI Tools", "GitHub Copilot, Claude Code, Antigravity"),
 ]
 
 EXPERIENCE = [
