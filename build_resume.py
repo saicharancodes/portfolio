@@ -97,8 +97,8 @@ doc = Document()
 
 # Tight margins for single page
 for section in doc.sections:
-    section.top_margin = Cm(0.8)
-    section.bottom_margin = Cm(0.8)
+    section.top_margin = Cm(0.95)
+    section.bottom_margin = Cm(0.95)
     section.left_margin = Cm(1.4)
     section.right_margin = Cm(1.4)
 
@@ -138,8 +138,8 @@ def add_horizontal_line(paragraph):
 
 def add_section_heading(text):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
-    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.space_before = Pt(5)
+    p.paragraph_format.space_after = Pt(2)
     run = p.add_run(text.upper())
     run.bold = True
     run.font.size = Pt(11)
@@ -150,7 +150,7 @@ def add_section_heading(text):
 
 def add_skill_line(label, value):
     p = doc.add_paragraph()
-    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.space_after = Pt(2)
     r1 = p.add_run(f"{label}: ")
     r1.bold = True
     r1.font.size = Pt(10)
@@ -160,7 +160,7 @@ def add_skill_line(label, value):
 
 def add_bullet(text):
     p = doc.add_paragraph(style="List Bullet")
-    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.left_indent = Cm(0.5)
     for segment, bold in split_bold(text):
         run = p.add_run(segment)
@@ -199,7 +199,7 @@ def _add_hyperlink(paragraph, url, text):
 
 def add_bullet_with_link(text, url, link_text="Badge"):
     p = doc.add_paragraph(style="List Bullet")
-    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.left_indent = Cm(0.5)
     r = p.add_run(text + "  |  ")
     r.font.size = Pt(10)
@@ -209,7 +209,7 @@ def add_bullet_with_link(text, url, link_text="Badge"):
 def add_role_header(role, company, dates, location):
     # Role + dates row
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
+    p.paragraph_format.space_before = Pt(5)
     p.paragraph_format.space_after = Pt(0)
     p.paragraph_format.tab_stops.add_tab_stop(Cm(17.5), WD_ALIGN_PARAGRAPH.RIGHT)
     r = p.add_run(f"{role} — {company}")
@@ -220,7 +220,7 @@ def add_role_header(role, company, dates, location):
     r2.font.size = Pt(10)
     # Location line
     p2 = doc.add_paragraph()
-    p2.paragraph_format.space_after = Pt(2)
+    p2.paragraph_format.space_after = Pt(3)
     r3 = p2.add_run(location)
     r3.italic = True
     r3.font.size = Pt(9.5)
@@ -301,16 +301,16 @@ def build_pdf(path):
     contact_style = ParagraphStyle("Contact", parent=base["Normal"], fontName="Helvetica",
                                    fontSize=9, leading=11, alignment=TA_CENTER, spaceAfter=5)
     section_style = ParagraphStyle("Section", parent=base["Heading2"], fontName="Helvetica-Bold",
-                                   fontSize=11, leading=12, textColor="#1F2A44",
+                                   fontSize=11, leading=13, textColor="#1F2A44",
                                    spaceBefore=5, spaceAfter=2)
     body_style = ParagraphStyle("Body", parent=base["Normal"], fontName="Helvetica",
-                                fontSize=9.2, leading=11.2, spaceAfter=2)
-    role_style = ParagraphStyle("Role", parent=base["Normal"], fontName="Helvetica-Bold",
-                                fontSize=10.5, leading=12, spaceBefore=4, spaceAfter=0)
+                                fontSize=9.2, leading=11.4, spaceAfter=2)
+    role_style = ParagraphStyle("Role", parent=base["Normal"], fontName="Helvetica",
+                                fontSize=10.5, leading=12.5, spaceBefore=5, spaceAfter=1)
     location_style = ParagraphStyle("Location", parent=base["Normal"], fontName="Helvetica-Oblique",
-                                    fontSize=9.5, leading=11, spaceAfter=2)
+                                                                        fontSize=9.5, leading=11.5, spaceAfter=3)
     bullet_style = ParagraphStyle("Bullet", parent=body_style, leftIndent=12,
-                                  bulletIndent=2, spaceAfter=1.5)
+                                                                      bulletIndent=2, spaceAfter=2)
 
     def link(text, url):
         return f'<font color="#1155CC"><link href="{html.escape(url)}"><u>{html.escape(text)}</u></link></font>'
@@ -335,8 +335,10 @@ def build_pdf(path):
 
     section("Professional Experience")
     for role in EXPERIENCE:
-        header = f"{html.escape(role['role'])} \u2014 {html.escape(role['company'])}"
-        story.append(Paragraph(f"{header} | {html.escape(role['dates'])}", role_style))
+        header = (f"<b>{html.escape(role['role'])}</b>  |  "
+                  f"<b>{html.escape(role['company'])}</b>  |  "
+                  f"{html.escape(role['dates'])}")
+        story.append(Paragraph(header, role_style))
         story.append(Paragraph(html.escape(role["location"]), location_style))
         for b in role["bullets"]:
             rich = "".join(f"<b>{html.escape(s)}</b>" if bold else html.escape(s)
@@ -354,7 +356,7 @@ def build_pdf(path):
 
     SimpleDocTemplate(path, pagesize=A4,
                       leftMargin=1.4 * RL_CM, rightMargin=1.4 * RL_CM,
-                      topMargin=0.8 * RL_CM, bottomMargin=0.8 * RL_CM,
+                      topMargin=0.95 * RL_CM, bottomMargin=0.95 * RL_CM,
                       title=NAME, author=NAME).build(story)
 
 
